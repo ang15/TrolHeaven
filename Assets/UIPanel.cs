@@ -5,17 +5,10 @@ using UnityEngine.EventSystems;
 public class UIPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public GameManager game;
+
     public Vector3 pozitionBegin;
     public Vector3 pozitionEnd;
-    void Start()
-    {
-        
-    }
 
-    void Update()
-    {
-        
-    }
     public void OnPointerDown(PointerEventData eventData)
     {
         pozitionBegin = eventData.position;
@@ -25,18 +18,19 @@ public class UIPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         game.left = false;
-        game.Right = false;
-        game.Up = false;
-        game.Down = false;
+        game.right = false;
+        //game.up = false;
+        game.down = false;
 
-       pozitionEnd = eventData.position;
+        pozitionEnd = eventData.position;
+
         if (pozitionBegin.x > pozitionEnd.x)
         {
             game.height = pozitionBegin.x - pozitionEnd.x;
         }
         else
         {
-            game.height = pozitionEnd.x - pozitionBegin.y;
+            game.height = pozitionEnd.x - pozitionBegin.x;
         }
 
         if (pozitionBegin.y > pozitionEnd.y)
@@ -64,18 +58,18 @@ public class UIPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             }
             else
             {
-                game.Right = true;
+                game.right = true;
             }
         }
         else
         {
             if (pozitionBegin.y > pozitionEnd.y)
             {
-                game.Up = true;
-            }
-            else
-            {
-                game.Down = true;
+                game.up = true;
+                //}
+                //else
+                //{
+                game.down = true;
             }
         }
         game.click = true;
